@@ -1,13 +1,13 @@
 import os
 import sys
-from core.constants.interval import REPORT_INTERVAL
-from core.deposit import Deposit
-from core.withdraw import Withdraw
+from investo.core.constants.interval import REPORT_INTERVAL
+from investo.core.deposit import Deposit
+from investo.core.withdraw import Withdraw
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
-from core.utils.returns_quarter import calculated_quarterly_return_compound, calculated_quarterly_return_non_compound
-from core.utils.returns_month import calculated_monthly_return_compound, calculated_monthly_return_non_compound
+from investo.core.utils.returns_quarter import calculated_quarterly_return_compound, calculated_quarterly_return_non_compound
+from investo.core.utils.returns_month import calculated_monthly_return_compound, calculated_monthly_return_non_compound
 from .generator import Generator
 
 class ReturnsGenerator(Generator):

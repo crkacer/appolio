@@ -6,7 +6,7 @@ parent = os.path.dirname(current)
 print(parent)
 sys.path.append(parent)
 
-from core.deposit import Deposit
+from investo.core.deposit import Deposit
 
 def mock_single_deposit(amount, datetime, name):
     return Deposit(

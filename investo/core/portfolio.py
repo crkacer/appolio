@@ -1,4 +1,4 @@
-from .account import Account
+from investo.core.account import Account
 class Portfolio:
 
     def __init__(self, accounts: [Account]) -> None:        

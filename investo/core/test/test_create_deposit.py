@@ -6,8 +6,8 @@ parent = os.path.dirname(current)
 print(parent)
 sys.path.append(parent)
 
-from core.deposit import Deposit
-from core.mock.create_mock_deposit import mock_deposits
+from investo.core.deposit import Deposit
+from investo.core.mock.create_mock_deposit import mock_deposits
 from datetime import datetime
 
 class TestCreateDeposit(unittest.TestCase):

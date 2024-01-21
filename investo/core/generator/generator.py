@@ -3,9 +3,9 @@ import sys
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
-from core.constants.interval import REPORT_INTERVAL
-from core.deposit import Deposit
-from core.withdraw import Withdraw
+from investo.core.constants.interval import REPORT_INTERVAL
+from investo.core.deposit import Deposit
+from investo.core.withdraw import Withdraw
 
 class Generator:
 

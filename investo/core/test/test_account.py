@@ -1,16 +1,18 @@
 import unittest
 import os
 import sys
+
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 
-from core.account import Account
-from core.mock.create_mock_deposit import mock_deposits
-from core.mock.create_mock_withdraw import mock_withdraws
-from core.generator.report_generator import ReportGenerator
-from core.generator.chart_generator import ChartGenerator
-from core.generator.returns_generator import ReturnsGenerator
+from investo.core.account import Account
+from investo.core.mock.create_mock_deposit import mock_deposits
+from investo.core.mock.create_mock_withdraw import mock_withdraws
+from investo.core.generator.report_generator import ReportGenerator
+from investo.core.generator.chart_generator import ChartGenerator
+from investo.core.generator.returns_generator import ReturnsGenerator
+
 
 class TestAccount(unittest.TestCase):
 
@@ -33,7 +35,6 @@ class TestAccount(unittest.TestCase):
 
     def test_account_returns_monthly_interval(self):
         return self.test_account
-
 
     def test_account_returns_weekly_interval(self):
         return self.test_account
