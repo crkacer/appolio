@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rentoro',
     'investo',
+    'investo.investor',
+    'investo.manager',
     'rest_framework'
 ]
 
