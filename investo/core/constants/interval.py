@@ -1,1 +1,1 @@
-REPORT_INTERVAL = enumerate("monthly", "quarterly")
+REPORT_INTERVAL = enumerate(["monthly", "quarterly"])
