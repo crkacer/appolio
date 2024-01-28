@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
+from investo import urls as investo_urls
+from rentoro import urls as rentoro_urls
 import datetime
 
 def get_ip(request):
@@ -25,7 +27,7 @@ def get_ip(request):
     return HttpResponse(html)
 
 urlpatterns = [
-    path('rentoro/', include("rentoro.urls")),
-    path('investo/', include("investo.urls")),
+    path('rentoro/', include(rentoro_urls)),
+    path('investo/', include(investo_urls)),
     path('', get_ip)
 ]
