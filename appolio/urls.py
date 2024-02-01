@@ -21,10 +21,12 @@ from investo import urls as investo_urls
 from rentoro import urls as rentoro_urls
 import datetime
 
+
 def get_ip(request):
     ip = request.META.get('REMOTE_ADDR')
     html = f"<html><body>IP: {ip}</body></html>"
     return HttpResponse(html)
+
 
 urlpatterns = [
     path('rentoro/', include(rentoro_urls)),

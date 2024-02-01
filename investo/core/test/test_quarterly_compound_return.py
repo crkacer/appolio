@@ -4,7 +4,7 @@ import sys
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
-from investo.core.utils.returns_quarter import calculated_quarterly_return_compound
+from investo.core.utils.returns_quarter import calculated_quarterly_return_compound_unit_day
 
 class TestQuarterlyCompoundReturn(unittest.TestCase):
 
@@ -14,7 +14,7 @@ class TestQuarterlyCompoundReturn(unittest.TestCase):
         cal_day, cal_month, cal_year = 1, 6, 2022
         interest_rate = 0.09
         
-        returns = calculated_quarterly_return_compound(start_amount, start_day, start_month, start_year, cal_day, cal_month, cal_year, interest_rate)
+        returns = calculated_quarterly_return_compound_unit_day(start_amount, start_day, start_month, start_year, cal_day, cal_month, cal_year, interest_rate)
         
         
         self.assertEqual({
@@ -32,7 +32,7 @@ class TestQuarterlyCompoundReturn(unittest.TestCase):
         cal_day, cal_month, cal_year = 1, 6, 2023
         interest_rate = 0.09
         
-        returns = calculated_quarterly_return_compound(start_amount, start_day, start_month, start_year, cal_day, cal_month, cal_year, interest_rate)
+        returns = calculated_quarterly_return_compound_unit_day(start_amount, start_day, start_month, start_year, cal_day, cal_month, cal_year, interest_rate)
         
         print(returns)
         self.assertEqual({

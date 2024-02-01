@@ -1,7 +1,7 @@
 # app_name/management/commands/seed_data.py
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from investo.models import InvestorProfile
+from investo.models import ManagerProfile
 from datetime import datetime
 
 
@@ -11,12 +11,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('Seeding data...'))
         # Your seeding logic goes here
-        user = User.objects.filter(email="test.user@appolio.ca").first()
+        user = User.objects.filter(email="test.manager@appolio.ca").first()
         if user:
-            profile = InvestorProfile(
-                email="test.user@appolio.ca",
+            profile = ManagerProfile(
+                email="test.manager@appolio.ca",
                 first_name="Test",
-                last_name="User",
+                last_name="Manager",
                 middle_name="",
                 dob="01-01-1990",
                 SIN="000000000",

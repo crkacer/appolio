@@ -30,6 +30,32 @@ class InvestorProfile(models.Model):
         return 'Investor Profile: {} {}'.format(self.first_name, self.last_name)
 
 
+class ManagerProfile(models.Model):
+    email = models.CharField(max_length=255, blank=True)
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
+    middle_name = models.CharField(max_length=255, blank=True)
+    dob = models.CharField(max_length=255, blank=True)
+    SIN = models.CharField(max_length=255, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    province = models.CharField(max_length=255, blank=True)
+    postal_code = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=255, blank=True)
+    status = models.CharField(max_length=50, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    completed = models.IntegerField(default=0)
+    updated_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(default=datetime.now, blank=True)
+
+    class Meta:
+        db_table = 'manager_profile'
+        managed = True
+
+    def __str__(self):
+        return 'Manager Profile: {} {}'.format(self.first_name, self.last_name)
+
+
 class InvestorAccount(models.Model):
     investor_profile = models.ForeignKey(InvestorProfile, on_delete=models.CASCADE)
     account_name = models.CharField(max_length=255, blank=True, null=True)
@@ -102,3 +128,25 @@ class InvestorAccountMeta(models.Model):
 
     class Meta:
         db_table = "investor_account_meta"
+
+
+class InvestoLicenseType(models.Model):
+    license_type = models.CharField(max_length=255, blank=False)
+
+    class Meta:
+        db_table = "investo_license_type"
+
+
+class InvestoLicense(models.Model):
+    license_type = models.ForeignKey(InvestoLicenseType, on_delete=models.CASCADE)
+    manager = models.ForeignKey(ManagerProfile, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        db_table = "investo_license"
+
+
+class InvestoLicensePermission(models.Model):
+    license = models.ForeignKey(InvestoLicense, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "investo_license_permission"

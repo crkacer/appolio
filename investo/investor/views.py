@@ -6,6 +6,7 @@ from investo.models import InvestorAccount, InvestorAccountTransaction
 from investo.core.account import Account as CoreAccount
 from datetime import datetime, date
 
+
 class AccountDetailView(APIView):
 
     def put(self, request):
@@ -21,10 +22,10 @@ class AccountView(APIView):
         pass
 
     def post(self, request):
-        id = request.data.get("id")
+        account_id = request.data.get("id")
         report_interval = request.data.get("interval")
         report_unit = request.data.get("unit")
-        account = InvestorAccount.objects.filter(account_id=id).first()
+        account = InvestorAccount.objects.filter(account_id=account_id).first()
 
         if account:
             account_deposits = InvestorAccountTransaction.objects.filter(account=account, transaction_type="Investor_Deposit").all()
