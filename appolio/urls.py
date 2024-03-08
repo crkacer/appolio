@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 from investo import urls as investo_urls
 from rentoro import urls as rentoro_urls
+from appolio.api import api
 import datetime
 
 
@@ -31,5 +32,6 @@ def get_ip(request):
 urlpatterns = [
     path('rentoro/', include(rentoro_urls)),
     path('investo/', include(investo_urls)),
+    path('api/', api.urls),
     path('', get_ip)
 ]
