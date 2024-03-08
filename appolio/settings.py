@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rentoro',
-    'rentoro.landlord',
-    'rentoro.tenant',
     'investo',
     'investo.investor',
     'investo.manager',
     'rentoro.landlord',
+    'rentoro.landlord.rentals',
     'rentoro.tenant',
     'rest_framework'
 ]

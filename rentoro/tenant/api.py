@@ -2,7 +2,6 @@ from ninja import Router
 
 router = Router()
 
-@router.get('/')
-def root_get(request):
-    
-    return {"msg": "Tenant root route"}
+@router.get('/profile')
+def get_tenant_profile(request):
+    return {"ok": True}
