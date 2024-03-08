@@ -14,3 +14,5 @@ rentoro/__pycache__/**
 debug.log
 private_key.pem
 public_key.pem
+*.pyc
+**/*.pyc
