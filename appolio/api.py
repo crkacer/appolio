@@ -1,6 +1,7 @@
 from ninja import NinjaAPI
 import orjson
 from ninja.renderers import BaseRenderer
+from rentoro.api import router as rentoro_router
 class ORJSONRenderer(BaseRenderer):
     media_type = "application/json"
 
@@ -9,4 +10,4 @@ class ORJSONRenderer(BaseRenderer):
     
 # api = NinjaAPI(renderer=ORJSONRenderer())
 api = NinjaAPI()
-api.add_router("/rentoro/", "rentoro.api.router")
+api.add_router("/rentoro/", rentoro_router)

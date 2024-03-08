@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'investo',
     'investo.investor',
     'investo.manager',
+    'rentoro.rentoro_auth',
     'rentoro.landlord',
     'rentoro.landlord.rentals',
     'rentoro.tenant',
