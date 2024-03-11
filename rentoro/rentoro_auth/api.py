@@ -2,8 +2,15 @@ from ninja import Router, Schema
 from django.contrib.auth.models import User
 from rentoro.models import LandlordProfile, TenantProfile
 from django.contrib.auth import authenticate
+from datetime import datetime, date
+from rentoro.rentoro_auth.crypto import encode, decode
+from django.http import HttpResponse, HttpRequest
+from rentoro.rentoro_auth.authorization import CookieAuth, RefreshCookieAuth
+import json 
+import ast
 
 router = Router()
+cookie_auth = CookieAuth()
 
 class UserLoginSchema(Schema):
     email: str
@@ -15,14 +22,29 @@ class UserRegisterSchema(Schema):
     password: str
     user_type: str
 
+class UserTokenSchema(Schema):
+    token: str
 
 @router.post('/login')
-def login(request, user_login: UserLoginSchema):
+def login(request, user_login: UserLoginSchema, response: HttpResponse):
     try:
         user = authenticate(username=user_login.email, password=user_login.password)
         if user:
-        
-            return {"token": "Login Token"}
+            time_now = datetime.now()
+            payload = {
+                "email": user_login.email,
+                "timestamp": int(time_now.timestamp())
+            }
+            token = encode(payload, "random_footer", "implicit_assertion" )
+            token_str = token.decode("utf-8")
+            # Update last login time
+            user.last_login = time_now
+            user.save()
+            # Set response cookies
+            response.set_cookie("refresh_token", token_str)
+            response.set_cookie("api_token", token_str)
+
+            return {"token": token_str}
         else:
             return {"error": "Invalid email or password"}
     except Exception as e:
@@ -60,5 +82,22 @@ def register(request, user_register: UserRegisterSchema):
         
         return {"ok": True}
     
+    except Exception as e:
+        return {"error": str(e)}
+    
+
+@router.get('/validate-token', auth=CookieAuth())
+def validate_token(request):
+    try:
+        user = request.auth
+        return {"email": user.email}
+    except Exception as e:
+        return {"error": str(e)}
+    
+
+@router.post('/delegate', auth=RefreshCookieAuth())
+def delegate(request):
+    try:
+        pass
     except Exception as e:
         return {"error": str(e)}

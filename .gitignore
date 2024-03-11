@@ -11,6 +11,7 @@ venv/
 appolio/__pycache__/**
 investo/__pycache__/**
 rentoro/__pycache__/**
+rentoro/__pycache__/
 debug.log
 private_key.pem
 public_key.pem

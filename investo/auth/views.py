@@ -5,6 +5,8 @@ from pyseto import Key
 from django.conf import settings
 from .crypto import encode, decode
 from datetime import date, datetime
+from uuid import uuid4
+
 @api_view(['POST'])
 def login(request):
 
@@ -13,7 +15,7 @@ def login(request):
         data = request.data
         email = data.get('email')
         password = data.get('password')
-        token = encode(email, "random_footer", "imp")
+        token = encode(email, "random_footer", str(uuid4()))
         token_decode = token.decode("utf-8")
         resp = Response()
         resp.set_cookie(key="token", value=token_decode, httponly=False)

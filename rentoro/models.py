@@ -5,6 +5,13 @@ from datetime import datetime
 
 # Create your models here.
 
+class UserVerification(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    verify_code = models.CharField(max_length=6, blank=True)
+    expiry_date = models.DateTimeField(blank=True)
+    status = models.CharField(max_length=50, blank=True)
+
 class TenantProfile(models.Model):
     email = models.CharField(max_length=255, blank=True)
     first_name = models.CharField(max_length=255, blank=True)
