@@ -93,6 +93,15 @@ class RentalProperty(models.Model):
         return 'Rental Property: {} {}'.format(self.address, self.city)
 
 
+
+class RentalPropertyShare(models.Model):
+
+    rental = models.ForeignKey(RentalProperty, on_delete=models.CASCADE)
+    unique_code = models.CharField(max_length=100, blank=True)
+    expire_at = models.DateTimeField(blank=True)
+    updated_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(default=datetime.now, blank=True)
+
 class RentalPropertyUnit(models.Model):
     unit_name = models.CharField(max_length=255, blank=True)
     unit_id = models.CharField(max_length=255, blank=True)

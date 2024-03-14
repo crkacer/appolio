@@ -22,5 +22,5 @@ class CookieAuth(APIKeyCookie):
     
 class RefreshCookieAuth(APIKeyCookie):
     param_name = "refresh_token"
-    def authenticate(self, request: HttpRequest, key: str | None) -> Any | None:
+    def authenticate(self, request: HttpRequest, key):
         return key

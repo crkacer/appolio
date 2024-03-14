@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+GOOGLE_OAUTH2_CLIENT_ID=''
+GOOGLE_OAUTH2_CLIENT_SECRET=''
+BASE_FRONTEND_URL='http://localhost:3000'
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'rentoro.rentoro_auth',
     'rentoro.landlord',
     'rentoro.landlord.rentals',
+    'rentoro.landlord.application',
     'rentoro.tenant',
     'rest_framework'
 ]

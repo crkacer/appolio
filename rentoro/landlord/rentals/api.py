@@ -4,6 +4,14 @@ from rentoro.models import RentalProperty, RentalPropertyUnit, LandlordProfile
 from ninja import Schema
 from uuid import uuid4
 from rentoro.rentoro_auth.authorization import CookieAuth, RefreshCookieAuth
+from rentoro.utils.property_code import generate_unique_property_code
+from rentoro.models import RentalPropertyShare
+import logging
+from datetime import datetime
+from rentoro.landlord.rentals.utils import fetch_rental_share_code
+from rentoro.landlord.application.api import router as application_router
+
+router = Router()
 
 class RentalCreateSchema(Schema):
     address: str
@@ -14,7 +22,26 @@ class RentalCreateSchema(Schema):
     status: str
 
 
-router = Router()
+class RentalUnitCreateSchema(Schema):
+    pass
+
+class RentalIDSchema(Schema):
+    id: str
+
+
+
+@router.post('/share')
+def share_rental(request, rental_id: RentalIDSchema):
+    try:    
+        rental = RentalProperty.objects.filter(rental_id=rental_id).first()
+        if rental:
+            # generate rental_id and look-up for the same id if exists
+            code = fetch_rental_share_code(rental)
+            return {'code': code}
+        return {''}
+    except Exception as e:
+        return {'error': str(e)}
+
 
 @router.get('/')
 def get_rentals(request):
