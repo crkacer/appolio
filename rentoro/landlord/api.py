@@ -1,13 +1,12 @@
 from ninja import Router, Schema
 from rentoro.landlord.rentals.api import router as rentals_router
 from rentoro.models import LandlordProfile
-from rentoro.landlord.application.api import router as application_router
 import logging
 
 router = Router()
 
 router.add_router('/rentals', rentals_router)
-router.add_router('/applications', application_router)
+
 class LandlordUpdateProfileSchema(Schema):
 
     first_name: str
@@ -56,3 +55,4 @@ def update_profile(request, user, profile: LandlordUpdateProfileSchema):
     except Exception as e:
         logger.debug(str(e))
         return {"error": "Something went wrong"}
+    

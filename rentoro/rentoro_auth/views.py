@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from rest_framework.response import Response
 from .mixins import PublicApiMixin, ApiErrorsMixin
 from .utils import google_get_access_token, google_get_user_info, generate_tokens_for_user
-from .models import User as OAuthUser
+from rentoro.models import User as OAuthUser
 from rest_framework import status
 from .serializers import UserSerializer
 

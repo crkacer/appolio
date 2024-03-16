@@ -6,8 +6,7 @@ from datetime import datetime, date
 from rentoro.rentoro_auth.crypto import encode, decode
 from django.http import HttpResponse, HttpRequest
 from rentoro.rentoro_auth.authorization import CookieAuth, RefreshCookieAuth
-import json 
-import ast
+
 
 router = Router()
 cookie_auth = CookieAuth()

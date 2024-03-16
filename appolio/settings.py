@@ -9,13 +9,15 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+ENV_PATH = os.path.join(BASE_DIR, '.env')
 
-
+env = load_dotenv(ENV_PATH)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -27,9 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-GOOGLE_OAUTH2_CLIENT_ID=''
-GOOGLE_OAUTH2_CLIENT_SECRET=''
-BASE_FRONTEND_URL='http://localhost:3000'
+GOOGLE_OAUTH2_CLIENT_ID=os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_OAUTH2_CLIENT_SECRET=os.getenv("GOOGLE_CLIENT_SECRET")
+BASE_FRONTEND_URL=os.getenv("BASE_FRONTEND_URL")
+
+# AUTH_USER_MODEL='rentoro.RentoroUser'
 # Application definition
 
 INSTALLED_APPS = [
