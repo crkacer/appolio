@@ -165,3 +165,87 @@ class RentalPropertyTransaction(models.Model):
     class Meta:
         db_table = 'rental_property_transaction'
         managed = True
+
+
+class RentalApplicationOtherTransaction(models.Model):
+    application = models.ForeignKey('RentalApplication', on_delete=models.CASCADE)
+    transaction_type = models.CharField(max_length=255, blank=True)
+    transaction_due_date = models.DateTimeField(default=datetime.now, blank=True)
+    transaction_amount = models.FloatField(default=0)
+
+
+    class Meta:
+        db_table = 'rental_application_other_transaction'
+        managed = True
+
+
+class RentalApplicationFee(models.Model):
+    application = models.ForeignKey('RentalApplication', on_delete=models.CASCADE)
+    fee_type = models.CharField(max_length=255, blank=True)
+    fee_amount_type = models.CharField(max_length=255, blank=True) # fixed or percentage
+    fee_due_date = models.DateTimeField(default=datetime.now, blank=True)
+    fee_amount = models.FloatField(default=0)
+
+    class Meta:
+        db_table = 'rental_application_fee'
+        managed = True
+
+
+class RentalApplicationUtility(models.Model):
+    application = models.ForeignKey('RentalApplication', on_delete=models.CASCADE)
+    utility_name = models.CharField(max_length=255, blank=True)
+    utility_owner = models.CharField(max_length=255, blank=True) # landlord or tenant or N/A
+
+    class Meta:
+        db_table = 'rental_application_utility'
+        managed = True
+
+
+class RentalApplicationInsurance(models.Model):
+    application = models.ForeignKey('RentalApplication', on_delete=models.CASCADE)
+    insurance_name = models.CharField(max_length=255, blank=True)
+    # TODO: Insurance Details
+    # 
+
+    class Meta:
+        db_table = 'rental_application_insurance'
+        managed = True
+
+
+class RentalApplication(models.Model):
+    application_id = models.CharField(max_length=255, blank=True)
+    property_unit = models.ForeignKey(RentalPropertyUnit, on_delete=models.CASCADE)
+    tenant = models.ForeignKey(TenantProfile, on_delete=models.CASCADE)
+    # Tenant Application's details
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
+    middle_name = models.CharField(max_length=255, blank=True)
+    dob = models.CharField(max_length=255, blank=True)
+    SIN = models.CharField(max_length=255, blank=True)
+    postal_code = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=255, blank=True)
+    email = models.CharField(max_length=255, blank=True)
+
+    # Rental Application's details
+    rental_type = models.CharField(max_length=255, blank=True)
+    start_date = models.DateTimeField(default=datetime.now, blank=True)
+    end_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    # Payment Details
+    payment_schedule_type = models.CharField(max_length=255, blank=True)
+    payment_start_date = models.DateTimeField(default=datetime.now, blank=True)
+    payment_amount = models.FloatField(default=0)
+
+    deposit_amount = models.FloatField(default=0)
+
+
+    status = models.CharField(max_length=255, blank=True)
+    updated_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(default=datetime.now, blank=True)
+
+    class Meta:
+        db_table = 'rental_application'
+        managed = True
+
+    def __str__(self):
+        return 'Rental Application: {}'.format(self.application_id)

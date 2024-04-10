@@ -31,6 +31,7 @@ def update_application_details(request, id):
 
 @router.post('/')
 def create_application(request):
+    # Invitation to apply for a rental property
     pass
 
 
@@ -38,3 +39,25 @@ def create_application(request):
 def delete_application(request, id):
     pass
 
+
+@router.post('/{id}/approve', auth=CookieAuth())
+def approve_application(request):
+    logger = logging.getLogger('django')
+    try:
+
+        return {'ok': True}
+    except Exception as e:
+        logger.info(str(e))
+        return {'error': str(e)} 
+    
+
+
+@router.post('/{id}/reject', auth=CookieAuth())
+def reject_application(request):
+    logger = logging.getLogger('django')
+    try:
+
+        return {'ok': True}
+    except Exception as e:
+        logger.info(str(e))
+        return {'error': str(e)}
